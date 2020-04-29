@@ -1,4 +1,4 @@
-# SocketIO_Client_py
+# Socketio_Client
 使用socketIO_client构建的python客户端示例
 
 # 说明  
