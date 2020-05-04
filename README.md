@@ -19,3 +19,19 @@ $ pip install socketIO-client
 执行 import client  
 
 发送数据只需调用 client.send() 即可  
+
+接收数据需要调用 client.recv(channl,callback)  
+
+callback 为收到消息时调用的方法，以下做了示例  
+
+```python
+def doSomeThing(*args):
+    print('recv:', args)
+
+
+# recv调用示例
+client.recv('view_channl', doSomeThing)
+
+# 若想收到消息 务必调用此方法
+client.wait()
+```

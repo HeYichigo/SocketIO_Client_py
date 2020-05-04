@@ -6,11 +6,19 @@ import logging
 logging.getLogger('socketIO-client').setLevel(logging.DEBUG)
 logging.basicConfig()
 
-socketIO = SocketIO('https://www.xxx.com/', port=443, verify=False)
+_socketIO = SocketIO('https://www.dutbit.com/', port=443, verify=False)
 
-zigbee = socketIO.define(BaseNamespace, '/zigbee')
+_client = _socketIO.define(BaseNamespace, '/zigbee')
 
 
-def send(message):
-    zigbee.emit('collection_channl', {
-                'message': message, 'timestamp': time.time()})
+def send(channl: str, message):
+    _client.emit(channl, {
+        'message': message, 'timestamp': time.time()})
+
+
+def recv(channl: str, callback: object):
+    _client.on(channl, callback)
+
+
+def wait():
+    _socketIO.wait()
